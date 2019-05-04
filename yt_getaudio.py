@@ -1,7 +1,7 @@
 #실행 전 pip 등을 통해 requests, youtube-dl, pafy를 설치해 주세요
 #만약 스크립트가 정상적으로 실행되지 않을 경우 'import youtube_dl'을 맨 윗줄에 추가해 주세요
 
-import requests, pafy
+import requests, pafy, webbrowser
 
 print('곡 아티스트, 제목을 입력하세요 (예: Pink Floyd Comfortably Numb)')
 title = input('>')
@@ -20,6 +20,11 @@ print('찾은 비디오: ' + video.title + '(' + url + ')')
 
 print('오디오 스트리밍 링크 추출 중...')
 bestaudio = video.getbestaudio()
+url = bestaudio.url
 
 print('링크: ', end='')
-print(bestaudio.url)
+print(url)
+
+s = input('바로 링크를 여시겠습니까? (y:확인): ')
+if s == 'y' or s == 'Y':
+	webbrowser.open(url)
