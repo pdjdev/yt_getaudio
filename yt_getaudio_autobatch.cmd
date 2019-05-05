@@ -5,21 +5,22 @@ REM 자동으로 .py 파일이 생성됩니다.
 
 @echo off
 echo 스크립트 로드 중...
-
+chcp 65001 >nul
 echo import requests, pafy, webbrowser >ytga.py
 echo from argparse import ArgumentParser >>ytga.py
 echo def geturl(val): >>ytga.py
 echo     s="i.ytimg.com/vi/"  >>ytga.py
 echo     return val[val.find(s)+len(s):val.find(s)+len(s)+11] >>ytga.py
 echo parser = ArgumentParser() >>ytga.py
-echo parser.add_argument("-q") >>ytga.py
+echo parser.add_argument("-q", "--query") >>ytga.py
 echo args = parser.parse_args() >>ytga.py
 echo title = args.query >>ytga.py
 echo r = requests.get("https://www.youtube.com/results?search_query="+title+' "topic"').text >>ytga.py
 echo video = pafy.new(geturl(r)) >>ytga.py
 echo url = video.getbestaudio().url >>ytga.py
-echo print('\n=== 조회 결과 ===\n'+str(video)) >>ytga.py
+echo print('\n=== Search Result ===\n'+str(video)) >>ytga.py
 echo webbrowser.open(url) >>ytga.py
+chcp 949 > nul
 
 echo 파이썬 설치 확인 중...
 python --version | find "Python 3"
