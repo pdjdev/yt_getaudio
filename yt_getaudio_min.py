@@ -2,15 +2,16 @@
 
 import requests, pafy, webbrowser
 
-title = input('Type Search Keyword(Artist, Title, ...): ')
-
 def geturl(val):
     s="i.ytimg.com/vi/" 
     return val[val.find(s)+len(s):val.find(s)+len(s)+11]
+
+title = input('Type Search Keyword(Artist, Title, ...): ')
 
 r = requests.get("https://www.youtube.com/results?search_query="+title+' "topic"').text
 video = pafy.new(geturl(r))
 url = video.getbestaudio().url
 print(str(video) + '\nLink: ' + url)
+s = input('Open in browser right now? (yes:y): ')
+if s == 'y' or s == 'Y': webbrowser.open(url)
 
-if input('Open in browser right now? (yes:y): ') == 'y' or 'Y': webbrowser.open(url)
